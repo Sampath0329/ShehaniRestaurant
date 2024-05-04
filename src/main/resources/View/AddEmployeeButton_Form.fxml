@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="centerNode" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.AddEmployeeButtonFormController">
+   <styleClass>
+      <String fx:value="shadow" />
+      <String fx:value="pane" />
+   </styleClass>
+   <children>
+      <Label layoutX="567.0" layoutY="38.0" style="-fx-opacity: 0.5;" text=" Employee Manage" textFill="WHITE">
+         <font>
+            <Font name="DejaVu Sans Bold" size="51.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="939.0" layoutY="171.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <TextField fx:id="txtAddress" layoutX="262.0" layoutY="280.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <TextField fx:id="txtTel" layoutX="939.0" layoutY="279.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <JFXButton fx:id="btnClear" layoutX="891.0" layoutY="577.0" prefHeight="38.0" prefWidth="104.0" style="-fx-opacity: 0.5;" text="Clear" />
+      <JFXButton fx:id="btnDelete" layoutX="1034.0" layoutY="577.0" prefHeight="38.0" prefWidth="134.0" style="-fx-opacity: 0.5;" text="Delete" />
+      <JFXButton fx:id="btnUpdate" layoutX="1210.0" layoutY="577.0" prefHeight="38.0" prefWidth="141.0" style="-fx-opacity: 0.5;" text="Update" />
+      <JFXButton fx:id="btnSave" layoutX="1383.0" layoutY="577.0" prefHeight="38.0" prefWidth="104.0" style="-fx-opacity: 0.5;" text="Save" />
+      <TableView fx:id="tblFullTimeEmployee" layoutX="65.0" layoutY="634.0" prefHeight="343.0" prefWidth="1461.0" style="-fx-opacity: 0.5;">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="103.0" text="Id" />
+            <TableColumn fx:id="colName" minWidth="0.0" prefWidth="343.0" text="Name" />
+            <TableColumn fx:id="colAddress" minWidth="0.0" prefWidth="456.0" text="Address" />
+            <TableColumn fx:id="colTel" minWidth="0.0" prefWidth="173.0" text="Tel" />
+            <TableColumn fx:id="colSalary" minWidth="0.0" prefWidth="151.0" text="Salary" />
+            <TableColumn fx:id="colHireDate" minWidth="0.0" prefWidth="136.0" text="Hire Date" />
+            <TableColumn fx:id="colUserId" minWidth="0.0" prefWidth="98.0" text="User Id" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtSalary" layoutX="262.0" layoutY="391.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <Label layoutX="262.0" layoutY="143.0" style="-fx-opacity: 0.5;" text="FullTimeEmployee Id:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="262.0" layoutY="250.0" style="-fx-opacity: 0.5;" text="Address*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="939.0" layoutY="143.0" style="-fx-opacity: 0.5;" text=" Name*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="941.0" layoutY="250.0" style="-fx-opacity: 0.5;" text=" Tel*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="263.0" layoutY="363.0" style="-fx-opacity: 0.5;" text="Salary*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="262.0" layoutY="477.0" style="-fx-opacity: 0.5;" text="User Id:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" layoutX="262.0" layoutY="173.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <TextField fx:id="txtHireDate" layoutX="939.0" layoutY="391.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <Label layoutX="940.0" layoutY="363.0" style="-fx-opacity: 0.5;" text="Hire Date*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbUserId" layoutX="355.0" layoutY="477.0" prefHeight="21.0" prefWidth="63.0" style="-fx-opacity: 0.5;">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnPartTimeEmp" layoutX="10.0" layoutY="503.0" onAction="#partTimeEmpOnAction" prefHeight="49.0" prefWidth="294.0" style="-fx-opacity: 1;" text="Add Part Time Employee" />
+      <JFXButton fx:id="btnFullTimeEmp" layoutX="10.0" layoutY="446.0" onAction="#fullTimeEmpOnAction" prefHeight="49.0" prefWidth="294.0" style="-fx-opacity: 1;" text="Add Full Time Employee" />
+   </children>
+</AnchorPane>

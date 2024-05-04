@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.PartTimeEmployeeFormController">
+   <styleClass>
+      <String fx:value="shadow" />
+      <String fx:value="pane" />
+   </styleClass>
+   <children>
+      <Label layoutX="455.0" layoutY="36.0" text="Part Time Employee Manage" textFill="WHITE">
+         <font>
+            <Font name="DejaVu Sans Bold" size="51.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="939.0" layoutY="171.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtAddress" layoutX="262.0" layoutY="280.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtTel" layoutX="939.0" layoutY="279.0" prefHeight="48.0" prefWidth="433.0" />
+      <JFXButton fx:id="btnClear" layoutX="891.0" layoutY="577.0" onAction="#clearOnAction" prefHeight="38.0" prefWidth="104.0" text="Clear" />
+      <JFXButton fx:id="btnDelete" layoutX="1034.0" layoutY="577.0" onAction="#deleteOnAction" prefHeight="38.0" prefWidth="134.0" text="Delete" />
+      <JFXButton fx:id="btnUpdate" layoutX="1210.0" layoutY="577.0" onAction="#updateOnAction" prefHeight="38.0" prefWidth="141.0" text="Update" />
+      <JFXButton fx:id="btnSave" layoutX="1383.0" layoutY="577.0" onAction="#saveOnAction" prefHeight="38.0" prefWidth="104.0" text="Save" />
+      <TableView fx:id="tblPartTimeEmployee" layoutX="65.0" layoutY="634.0" prefHeight="343.0" prefWidth="1461.0">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="103.0" text="Id" />
+            <TableColumn fx:id="colName" minWidth="0.0" prefWidth="343.0" text="Name" />
+            <TableColumn fx:id="colAddress" minWidth="0.0" prefWidth="408.0" text="Address" />
+            <TableColumn fx:id="colTel" minWidth="0.0" prefWidth="176.0" text="Tel" />
+            <TableColumn fx:id="colWorkingHour" minWidth="0.0" prefWidth="97.0" text="Working Hour" />
+            <TableColumn fx:id="colPerHourSalary" minWidth="0.0" prefWidth="118.0" text="Per Hour Salary" />
+            <TableColumn fx:id="colHireDate" minWidth="0.0" prefWidth="91.0" text="Hire Date" />
+            <TableColumn fx:id="colUserId" minWidth="0.0" prefWidth="124.0" text="User Id" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtWorkinHour" layoutX="262.0" layoutY="391.0" prefHeight="48.0" prefWidth="433.0" />
+      <Label layoutX="262.0" layoutY="143.0" text="Part Time Employee Id*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="262.0" layoutY="250.0" text="Address*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="939.0" layoutY="143.0" text=" Name*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="941.0" layoutY="250.0" text=" Tel*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="263.0" layoutY="363.0" text="Working Hour*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="262.0" layoutY="477.0" text="User Id:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" layoutX="262.0" layoutY="173.0" onAction="#txtSearchOnActionId" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtPerHourSalary" layoutX="939.0" layoutY="391.0" prefHeight="48.0" prefWidth="433.0" />
+      <Label layoutX="940.0" layoutY="363.0" text="Per Hour Salary*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbUserId" layoutX="355.0" layoutY="477.0" prefHeight="21.0" prefWidth="63.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtHireDate" layoutX="939.0" layoutY="497.0" prefHeight="48.0" prefWidth="433.0" />
+      <Label layoutX="940.0" layoutY="469.0" text="Hire Date*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

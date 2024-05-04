@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="centerNode" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.ItemButtonController">
+   <styleClass>
+      <String fx:value="pane" />
+      <String fx:value="shadow" />
+   </styleClass>
+   <children>
+      <Label layoutX="647.0" layoutY="55.0" style="-fx-opacity: 0.5;" text="Item Manage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="51.0" />
+         </font>
+      </Label>
+      <TableView layoutX="75.0" layoutY="564.0" prefHeight="423.0" prefWidth="1461.0" style="-fx-opacity: 0.5;">
+         <columns>
+            <TableColumn fx:id="calId" prefWidth="149.0" text="BearId" />
+            <TableColumn fx:id="calName" prefWidth="385.0" text="Name" />
+            <TableColumn fx:id="calDes" prefWidth="318.0" text="Price" />
+            <TableColumn fx:id="calPrice" prefWidth="335.0" text="AvailabilityQty" />
+            <TableColumn fx:id="calQty" prefWidth="273.0" text="AlcoholContent" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtPrice" layoutX="282.0" layoutY="356.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <TextField fx:id="txtname" layoutX="959.0" layoutY="245.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <TextField fx:id="txtAlcoholContent" layoutX="282.0" layoutY="467.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <JFXButton fx:id="btnClear" layoutX="911.0" layoutY="500.0" prefHeight="38.0" prefWidth="104.0" style="-fx-opacity: 0.5;" text="Clear" />
+      <JFXButton fx:id="btnDelete" layoutX="1054.0" layoutY="500.0" prefHeight="38.0" prefWidth="134.0" style="-fx-opacity: 0.5;" text="Delete" />
+      <JFXButton fx:id="btnUpdate" layoutX="1230.0" layoutY="500.0" prefHeight="38.0" prefWidth="141.0" style="-fx-opacity: 0.5;" text="Update" />
+      <JFXButton fx:id="btnSave" layoutX="1403.0" layoutY="500.0" prefHeight="38.0" prefWidth="104.0" style="-fx-opacity: 0.5;" text="Save" />
+      <TextField fx:id="txtQty" layoutX="959.0" layoutY="356.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <Label layoutX="283.0" layoutY="225.0" style="-fx-opacity: 0.5;" text="Bear Id:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="959.0" layoutY="215.0" style="-fx-opacity: 0.5;" text="Name*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="282.0" layoutY="328.0" style="-fx-opacity: 0.5;" text="Price*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="284.0" layoutY="438.0" style="-fx-opacity: 0.5;" text="AlcoholContent*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="960.0" layoutY="328.0" style="-fx-opacity: 0.5;" text="AvailabilityQty*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" layoutX="282.0" layoutY="254.0" prefHeight="48.0" prefWidth="433.0" style="-fx-opacity: 0.5;" />
+      <AnchorPane layoutY="1.0" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10; -fx-background-color: white; -fx-opacity: 0.7;" />
+      <JFXButton fx:id="btnAddBearItem" layoutX="26.0" layoutY="396.0" onAction="#addBearItemOnAction" prefHeight="49.0" prefWidth="251.0" text="Add Bear Item" />
+      <JFXButton fx:id="btnAddFoodItem" layoutX="26.0" layoutY="339.0" onAction="#addFoodItemOnAction" prefHeight="49.0" prefWidth="251.0" text="Add Food Item" />
+   </children>
+</AnchorPane>

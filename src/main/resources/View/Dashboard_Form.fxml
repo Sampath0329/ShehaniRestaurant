@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="999.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.DashboardFormController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="11.0" prefHeight="979.0" prefWidth="300.0" style="-fx-background-color: #FF8A08; -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../Style/login_form.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1612.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label layoutX="108.0" layoutY="85.0" prefHeight="30.0" prefWidth="157.0" text="Restaurant.." textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+            </Label>
+            <VBox layoutX="10.0" layoutY="310.0" prefHeight="656.0" prefWidth="278.0" styleClass="shadow" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <children>
+                  <JFXButton fx:id="btnDashboard" onAction="#dashboardOnAction" prefHeight="60.0" prefWidth="334.0" text="Dashboard" />
+                  <JFXButton fx:id="btnFoodItem" onAction="#foodItemOnAction" prefHeight="60.0" prefWidth="334.0" text="FoodItem" />
+                  <JFXButton fx:id="btnUser" onAction="#userOnAction" prefHeight="60.0" prefWidth="334.0" text="User" />
+                  <JFXButton fx:id="btnEmployee" onAction="#employeeOnAction" prefHeight="60.0" prefWidth="334.0" text="Employee" />
+                  <JFXButton fx:id="btnCustomer" onAction="#customerOnAction" prefHeight="60.0" prefWidth="334.0" text="Customer" />
+                  <JFXButton fx:id="btnOrder" onAction="#orderOnAction" prefHeight="60.0" prefWidth="334.0" text="Order" />
+                  <JFXButton fx:id="btnVehicle" onAction="#vehicleOnAction" prefHeight="60.0" prefWidth="334.0" text="Vehicle" />
+                  <JFXButton fx:id="btnDelivery" onAction="#deliveryOnAction" prefHeight="60.0" prefWidth="334.0" text="Delivery" />
+                  <JFXButton fx:id="btnIngredient" onAction="#ingredientOnAction" prefHeight="60.0" prefWidth="334.0" text="Ingredient" />
+                  <JFXButton fx:id="btnSupplier" onAction="#supplierOnAction" prefHeight="60.0" prefWidth="334.0" text="Supplier" />
+                  <JFXButton fx:id="btnReport" onAction="#reportOnAction" prefHeight="60.0" prefWidth="334.0" text="Report" />
+                  <JFXButton fx:id="btnSetting" onAction="#settingOnAction" prefHeight="60.0" prefWidth="334.0" text="Setting" />
+                  <JFXButton fx:id="btnLogout" onAction="#logoutOnAction" prefHeight="60.0" prefWidth="334.0" text="Logout" />
+               </children>
+            </VBox>
+            <Label layoutX="20.0" layoutY="48.0" prefHeight="30.0" prefWidth="157.0" text="Shehani" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="centerNode" layoutX="319.0" layoutY="10.0" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css">
+         <styleClass>
+            <String fx:value="shadow" />
+            <String fx:value="pane" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+</AnchorPane>

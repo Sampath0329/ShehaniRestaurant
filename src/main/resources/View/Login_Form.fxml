@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="658.0" prefWidth="560.0" styleClass="pane" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.LoginFormController">
+   <children>
+      <Label fx:id="date" layoutX="397.0" layoutY="633.0" prefHeight="35.0" prefWidth="97.0" text="0000/00/00" textAlignment="CENTER" textFill="#00d4ff" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lTittle" layoutX="157.0" layoutY="31.0" text="Login Form" textFill="#1c00bc">
+         <font>
+            <Font name="System Bold" size="46.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" layoutX="167.0" layoutY="238.0" prefHeight="45.0" prefWidth="226.0" />
+      <Label layoutX="167.0" layoutY="210.0" text="Userame">
+         <font>
+            <Font name="Khmer OS System" size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPw" layoutX="167.0" layoutY="332.0" prefHeight="45.0" prefWidth="226.0" />
+      <Label layoutX="167.0" layoutY="304.0" text="Password">
+         <font>
+            <Font name="Khmer OS System" size="19.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnLogin" layoutX="237.0" layoutY="434.0" onAction="#loginOnAction" text="Login" textFill="#2600ff">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="time" layoutX="491.0" layoutY="633.0" prefHeight="35.0" prefWidth="69.0" text="00:00:00" textAlignment="CENTER" textFill="#00ddff" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

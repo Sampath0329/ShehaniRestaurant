@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="centerNode" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.IngredientFormController">
+   <children>
+      <Label layoutX="115.0" layoutY="44.0" text=" Ingredient Manage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="51.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbSupplier" layoutX="601.0" layoutY="136.0" prefHeight="734.0" prefWidth="925.0" style="-fx-background-radius: 10;">
+         <columns>
+            <TableColumn fx:id="calId" prefWidth="114.0" text="IngredientId" />
+            <TableColumn fx:id="calName" prefWidth="417.0" text="Name" />
+            <TableColumn fx:id="calEXPDate" prefWidth="175.0" text="EXP Date" />
+            <TableColumn fx:id="calQty" prefWidth="101.0" text="Qty" />
+            <TableColumn fx:id="calUnit" prefWidth="117.0" text="Unit" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtName" layoutX="112.0" layoutY="366.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtEXP" layoutX="112.0" layoutY="501.0" prefHeight="48.0" prefWidth="433.0" />
+      <JFXButton fx:id="btnClear" layoutX="66.0" layoutY="926.0" onAction="#clearOnAction" prefHeight="38.0" prefWidth="104.0" text="Clear" />
+      <JFXButton fx:id="btnDelete" layoutX="258.0" layoutY="926.0" onAction="#deleteOnAction" prefHeight="38.0" prefWidth="134.0" text="Delete" />
+      <JFXButton fx:id="btnUpdate" layoutX="484.0" layoutY="926.0" onAction="#updateOnAction" prefHeight="38.0" prefWidth="141.0" text="Update" />
+      <JFXButton fx:id="btnSave" layoutX="733.0" layoutY="926.0" onAction="#saveOnAction" prefHeight="38.0" prefWidth="104.0" text="Save" />
+      <Label layoutX="113.0" layoutY="205.0" text="Ingredient Id:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="112.0" layoutY="471.0" text="Expire Date*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="112.0" layoutY="338.0" text="Ingredient Name*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" layoutX="112.0" layoutY="234.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtQty" layoutX="109.0" layoutY="636.0" prefHeight="48.0" prefWidth="433.0" />
+      <Label layoutX="109.0" layoutY="606.0" text="Quantity*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUnit" layoutX="109.0" layoutY="767.0" prefHeight="48.0" prefWidth="433.0" text="Kg/L/Bottle" />
+      <Label layoutX="109.0" layoutY="737.0" text="Unit*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

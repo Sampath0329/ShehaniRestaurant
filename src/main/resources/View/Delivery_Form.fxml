@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="centerNode" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" styleClass="pane" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.DeliveryFormController">
+   <children>
+      <Label layoutX="115.0" layoutY="44.0" text=" Delivery Manage" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="51.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbSupplier" layoutX="613.0" layoutY="136.0" prefHeight="734.0" prefWidth="938.0" style="-fx-background-radius: 10;">
+         <columns>
+            <TableColumn fx:id="calId" prefWidth="133.0" text="DeliveryId" />
+            <TableColumn fx:id="calDesc" prefWidth="358.0" text="Description" />
+            <TableColumn fx:id="calAddress" prefWidth="293.0" text="Address" />
+            <TableColumn fx:id="calVehicleId" prefWidth="153.0" text="VehicleId" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtDesc" layoutX="112.0" layoutY="446.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtAddress" layoutX="112.0" layoutY="581.0" prefHeight="48.0" prefWidth="433.0" />
+      <JFXButton fx:id="btnClear" layoutX="66.0" layoutY="926.0" onAction="#clearOnAction" prefHeight="38.0" prefWidth="104.0" text="Clear" />
+      <JFXButton fx:id="btnDelete" layoutX="258.0" layoutY="926.0" onAction="#deleteOnAction" prefHeight="38.0" prefWidth="134.0" text="Delete" />
+      <JFXButton fx:id="btnUpdate" layoutX="484.0" layoutY="926.0" onAction="#updateOnAction" prefHeight="38.0" prefWidth="141.0" text="Update" />
+      <JFXButton fx:id="btnSave" layoutX="733.0" layoutY="926.0" onAction="#saveOnAction" prefHeight="38.0" prefWidth="104.0" text="Save" />
+      <Label layoutX="113.0" layoutY="285.0" text="Delivery Id*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="112.0" layoutY="551.0" text="Address*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="112.0" layoutY="418.0" text="Description*">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtId" layoutX="112.0" layoutY="314.0" prefHeight="48.0" prefWidth="433.0" />
+      <JFXComboBox fx:id="CBoxVehicleId" layoutX="236.0" layoutY="708.0" prefHeight="38.0" prefWidth="156.0" />
+      <Label layoutX="112.0" layoutY="716.0" text="Vehicle Id:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
