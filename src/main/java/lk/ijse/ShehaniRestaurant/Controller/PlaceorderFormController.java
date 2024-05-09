@@ -9,14 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.ijse.ShehaniRestaurant.Model.*;
 import lk.ijse.ShehaniRestaurant.Model.tm.CartTm;
 import lk.ijse.ShehaniRestaurant.Repository.*;
+import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -30,6 +34,12 @@ import java.util.Optional;
 import static java.lang.String.valueOf;
 
 public class PlaceorderFormController {
+
+    @FXML
+    public TextField txtCusTel;
+
+    @FXML
+    public AnchorPane centerNode;
 
     @FXML
     private JFXButton btnAddToCart;
@@ -56,7 +66,7 @@ public class PlaceorderFormController {
     private TableColumn<?, ?> colUnitPrice;
 
     @FXML
-    private Label lblCustomerId;
+    private Label lblCustomerName;
 
     @FXML
     private Label lblDate;
@@ -78,8 +88,9 @@ public class PlaceorderFormController {
 
     @FXML
     private Label lbltime;
+
     @FXML
-    private JFXComboBox<String> cmbCustomerId;
+    private Label lblCustomerId;
 
     @FXML
     private TableView<CartTm> tblOrderCart;
@@ -96,10 +107,21 @@ public class PlaceorderFormController {
         timeline.setCycleCount(Animation.INDEFINITE); // Repeat indefinitely
         timeline.play();
         updateDate();
-        getCustomerIds();
         getFoodItemCodes();
         getCurrentOrderId();
         setCellValueFactory();
+        LoadCustomerAllTel();
+    }
+
+    private void LoadCustomerAllTel() {
+        try {
+            List<String> cusTel = CustomerRepo.GetCustomerTel();
+            String[] possibleNames = cusTel.toArray(new String[0]);
+
+            TextFields.bindAutoCompletion(txtCusTel, possibleNames);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void setCellValueFactory() {
@@ -125,8 +147,9 @@ public class PlaceorderFormController {
 
     private String generateNextOrderId(String currentId) {
         if(currentId != null) {
-            String[] split = currentId.split("O");  //" ", "2"
-            int idNum = Integer.parseInt(split[1]);
+//            String[] split = currentId.split("O");  //" ", "2"
+//            int idNum = Integer.parseInt(split[1]);
+            int idNum = Integer.parseInt(currentId);
             return "O" + ++idNum;
         }
         return "O1";
@@ -152,21 +175,7 @@ public class PlaceorderFormController {
         }
     }
 
-    private void getCustomerIds() {
-        ObservableList<String> obList1 = FXCollections.observableArrayList();
-        try {
-            List<String> idList = CustomerRepo.getIds();
 
-            for(String id : idList) {
-                obList1.add(id);
-            }
-
-            cmbCustomerId.setItems(obList1);
-
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
-    }
 
     private void updateDate() {
         LocalDate now = LocalDate.now();
@@ -184,8 +193,38 @@ public class PlaceorderFormController {
     @FXML
     public void btnAddToCartOnAction(ActionEvent event) {
         String foodId = cmbFoodItemId.getValue();
-        String description = lblDescription.getText();
         int qty = Integer.parseInt(txtQty.getText());
+        if ('F' == foodId.charAt(0)){
+            try {
+                boolean isAvailabilityQty = FoodItemRepo.isAvailable(foodId,qty);
+                if (isAvailabilityQty){
+//                    new Alert(Alert.AlertType.CONFIRMATION, "Can Add to Cart").show();
+                    addToCart(foodId,qty);
+                } else {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Can not Add to Cart").show();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        } else {
+            try {
+                boolean isAvailabilityQty = BearRepo.isAvailable(foodId,qty);
+                if (isAvailabilityQty){
+//                    new Alert(Alert.AlertType.CONFIRMATION, "Can Add to Cart").show();
+                    addToCart(foodId,qty);
+                } else {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Can not Add to Cart").show();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
+
+
+    }
+
+    private void addToCart(String foodId, int qty) {
+        String description = lblDescription.getText();
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
         double total = qty * unitPrice;
         JFXButton btnRemove = new JFXButton("remove");
@@ -207,25 +246,6 @@ public class PlaceorderFormController {
                 System.out.println("Delete operation canceled.");
             }
         });
-
-
-//        btnRemove.setOnAction((e) -> {
-//            ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
-//            ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-//            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
-//
-//            if(type.orElse(no) == yes) {
-//                int selectedIndex = tblOrderCart.getSelectionModel().getSelectedIndex();
-//                obList.remove(selectedIndex);
-//
-//                tblOrderCart.refresh();
-//                calculateNetTotal();
-//
-//
-//
-//            }
-//        });
 
         for (int i = 0; i < tblOrderCart.getItems().size(); i++) {
             if(foodId.equals(colItemCode.getCellData(i))) {
@@ -250,7 +270,6 @@ public class PlaceorderFormController {
         calculateNetTotal();
         txtQty.setText("");
 
-
     }
 
     private void calculateNetTotal() {
@@ -265,7 +284,8 @@ public class PlaceorderFormController {
     public void btnPlaceOrderOnAction(ActionEvent event) {
 
         String orderId = lblOrderId.getText();
-        String customerId = cmbCustomerId.getValue();
+        String customerId = lblCustomerId.getText();
+
         Date date = Date.valueOf(LocalDate.now());
         Time time = Time.valueOf(LocalTime.now());
         String total = lblNetTotal.getText();
@@ -293,6 +313,7 @@ public class PlaceorderFormController {
             Boolean isPlaced = PlaceOrderRepo.PlaceOrder(po);
             if (isPlaced){
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
+                isCanLoadDeliveryPage = true;
             } else {
                 new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
             }
@@ -353,15 +374,73 @@ public class PlaceorderFormController {
         btnAddToCartOnAction(event);
     }
 
-    public void cmbCustomerOnAction(ActionEvent actionEvent) {
-        String id = cmbCustomerId.getValue();
-        try {
-            Customer customer = CustomerRepo.searchById(id);
 
-            lblCustomerId.setText(customer.getName());
+    public void txtCusTelOnAction(ActionEvent actionEvent) {
+        String tel = txtCusTel.getText();
+
+        try {
+            Customer customer = CustomerRepo.GetCustomer(tel);
+            lblCustomerId.setText(customer.getId());
+            lblCustomerName.setText(customer.getName());
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public static String DeliveryOrderId = null;
+//    public static String DeliveryOrderId = "O3";  // delete this
+
+    public boolean isCanLoadDeliveryPage = false;
+//    public boolean isCanLoadDeliveryPage = true; // delete this
+    public void AddToDeliveryOnAction(ActionEvent actionEvent) {
+        DeliveryOrderId = lblOrderId.getText();
+        if (isCanLoadDeliveryPage){
+            AnchorPane deliveryForm = null;
+            try {
+                deliveryForm = FXMLLoader.load(this.getClass().getResource("/View/Delivery_Form.fxml"));
+            } catch (IOException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+
+            centerNode.getChildren().clear();
+            centerNode.getChildren().add(deliveryForm);
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Can Not Load Delivery Form").show();
+        }
+    }
+
+    public void btnNewOnAction(ActionEvent actionEvent) {
+        customerTel = txtCusTel.getText();
+        AnchorPane customerPane = null;
+        try {
+            customerPane = FXMLLoader.load(this.getClass().getResource("/View/Customer_Form.fxml"));
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+        centerNode.getChildren().clear();
+        centerNode.getChildren().add(customerPane);
+    }
+    public static String customerTel = null;
+
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        ClearFields();
+    }
+
+    private void ClearFields() {
+        getCurrentOrderId();
+        lblCustomerName.setText("");
+        lblCustomerId.setText("");
+        txtCusTel.setText("");
+//        methn error ekk enw
+       cmbFoodItemId.setValue("");
+
+        lblDescription.setText("");
+        lblUnitPrice.setText("");
+        lblQtyOnHand.setText("");
+        tblOrderCart.refresh();
+        isCanLoadDeliveryPage = false;
+
     }
 }

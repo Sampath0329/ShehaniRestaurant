@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.ShehaniRestaurant.Model.Customer;
 import lk.ijse.ShehaniRestaurant.Model.User;
 import lk.ijse.ShehaniRestaurant.Model.tm.UserTm;
@@ -187,5 +188,17 @@ public class UserFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void getAllDetails(MouseEvent mouseEvent) {
+        tblUser.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            if (newSelection != null) {
+                txtId.setText(newSelection.getId());
+                txtname.setText(newSelection.getName());
+                txtPw.setText(newSelection.getPw());
+                txtNIC.setText(newSelection.getNIC());
+
+            }
+        });
     }
 }

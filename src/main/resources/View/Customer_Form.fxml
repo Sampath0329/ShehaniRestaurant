@@ -20,9 +20,9 @@
             <Font name="DejaVu Sans Bold" size="51.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" layoutX="939.0" layoutY="260.0" prefHeight="48.0" prefWidth="433.0" />
-      <TextField fx:id="txtNIC" layoutX="262.0" layoutY="262.0" prefHeight="48.0" prefWidth="433.0" />
-      <TextField fx:id="txtTel" layoutX="939.0" layoutY="375.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtName" layoutX="939.0" layoutY="260.0" onKeyReleased="#txtCustomerNameOnKeyReleased" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtNIC" layoutX="262.0" layoutY="262.0" onKeyReleased="#txtCustomerNICOnKeyReleased" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtTel" layoutX="939.0" layoutY="375.0" onKeyReleased="#txtCustomerTelOnKeyReleased" prefHeight="48.0" prefWidth="433.0" />
       <JFXButton fx:id="btnClear" layoutX="891.0" layoutY="480.0" onAction="#clearOnAction" prefHeight="38.0" prefWidth="104.0" text="Clear" />
       <JFXButton fx:id="btnDelete" layoutX="1034.0" layoutY="480.0" onAction="#deleteOnAction" prefHeight="38.0" prefWidth="134.0" text="Delete" />
       <JFXButton fx:id="btnUpdate" layoutX="1210.0" layoutY="480.0" onAction="#updateOnAction" prefHeight="38.0" prefWidth="141.0" text="Update" />
@@ -37,8 +37,8 @@
             <TableColumn fx:id="colUserId" minWidth="0.0" prefWidth="111.0" text="User Id" />
         </columns>
       </TableView>
-      <TextField fx:id="txtAddress" layoutX="262.0" layoutY="373.0" prefHeight="48.0" prefWidth="433.0" />
-      <Label layoutX="472.0" layoutY="161.0" text="Customer Id:">
+      <TextField fx:id="txtAddress" layoutX="262.0" layoutY="373.0" onKeyReleased="#txtCustomerAddressOnKeyReleased" prefHeight="48.0" prefWidth="433.0" />
+      <Label layoutX="262.0" layoutY="175.0" text="Customer Id:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="263.0" layoutY="345.0" text="Customer Address*">
+      <Label layoutX="262.0" layoutY="345.0" text="Customer Address*">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -73,6 +73,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtId" layoutX="594.0" layoutY="148.0" onAction="#txtSearchOnActionId" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtSearch" layoutX="1101.0" layoutY="48.0" onAction="#txtSearchOnActionId" prefHeight="48.0" prefWidth="281.0" />
+      <JFXButton layoutX="1398.0" layoutY="48.0" onAction="#btnSearchOnAction" prefHeight="48.0" prefWidth="141.0" text="Search" />
+      <Label fx:id="lblCustomerId" layoutX="396.0" layoutY="167.0" prefHeight="39.0" prefWidth="162.0" textFill="#0909cd">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -18,10 +18,11 @@ public class PlaceOrderRepo {
             if (isSaved){
                 boolean isOrderDetailSaved = OrderDetailRepo.Save(po.getOrderDetailList());
                 if (isOrderDetailSaved){
-
                     boolean isQtyUpdated = FoodItemRepo.CheckFoodItemOrBear(po.getOrderDetailList());
-                    connection.commit();
-                    return true;
+                    if (isQtyUpdated){
+                        connection.commit();
+                        return true;
+                    }
                 }
             }
             connection.rollback();

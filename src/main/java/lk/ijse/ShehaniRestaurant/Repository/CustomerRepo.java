@@ -4,8 +4,6 @@ package lk.ijse.ShehaniRestaurant.Repository;
 import lk.ijse.ShehaniRestaurant.DataBaseConnection.DbConnection;
 import lk.ijse.ShehaniRestaurant.Model.Customer;
 
-import javax.swing.*;
-import javax.xml.crypto.dsig.dom.DOMValidateContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +14,7 @@ import java.util.List;
 public class CustomerRepo {
 
     public static Boolean save(Customer customer) throws SQLException {
-        String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ? , ?)";
+        String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ? , ?, ?)";
 
         Connection connection = DbConnection.getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -26,15 +24,14 @@ public class CustomerRepo {
         pstm.setObject(4,customer.getTel());
         pstm.setObject(5,customer.getUsername());
         pstm.setObject(6,customer.getNIC());
+        pstm.setObject(7,"Yes");
 
 
         return pstm.executeUpdate() > 0;
     }
 
     public static List<Customer> getAll() throws SQLException {
-        String sql = "SELECT * FROM Customer";
-
-//        Connection connection = DbConnection.getConnection();
+        String sql = "SELECT * FROM Customer WHERE Active = 'Yes'";
         PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
 
         ResultSet resultSet = pstm.executeQuery();
@@ -81,7 +78,7 @@ public class CustomerRepo {
     }
 
     public static Boolean updated(Customer customer) throws SQLException {
-        String sql = "UPDATE Customer SET Name = ?, Address = ?, Contact = ?, UserId = ?, NIC = ? WHERE CustomerId = ?";
+        String sql = "UPDATE Customer SET Name = ?, Address = ?, Contact = ?, UserId = ?, NIC = ?, Active = 'Yes' WHERE CustomerId = ?";
 
         PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
 
@@ -96,7 +93,7 @@ public class CustomerRepo {
     }
 
     public static Boolean Delete(String id) throws SQLException {
-        String sql = "DELETE FROM Customer WHERE CustomerId = ?";
+        String sql = "UPDATE Customer SET Active = 'No' WHERE CustomerId = ?";
 
         PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
         pstm.setObject(1,id);
@@ -106,7 +103,7 @@ public class CustomerRepo {
     }
 
     public static List<String> getIds() throws SQLException {
-        String sql = "SELECT CustomerId FROM Customer";
+        String sql = "SELECT CustomerId FROM Customer WHERE Active = 'Yes'";
         PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
 
         List<String> idList = new ArrayList<>();
@@ -118,4 +115,56 @@ public class CustomerRepo {
         }
         return idList;
     }
+
+    public static List<String> GetCustomerTel() throws SQLException {
+        String sql = "SELECT Contact FROM Customer WHERE Active = 'Yes'";
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        List<String> telList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String tel = resultSet.getString(1);
+            telList.add(tel);
+        }
+        return telList;
+    }
+
+    public static Customer GetCustomer(String tel) throws SQLException {
+        String sql = "SELECT * FROM Customer WHERE Contact = ? AND Active = 'Yes'";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        pstm.setObject(1,tel);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()){
+            String id = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            String address = resultSet.getString(3);
+            String tbTel = resultSet.getString(4);
+            String username = resultSet.getString(5);
+            String NIC = resultSet.getString(6);
+
+            Customer customer = new Customer(id,name,address,tbTel,username,NIC);
+
+            return customer;
+        }
+        return null;
+    }
+
+    public static int GetCustomerCount() throws SQLException {
+        String sql = "SELECT *  FROM Customer;";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+        int customerCount = 0;
+        while (resultSet.next()){
+            ++customerCount;
+
+        }
+        return customerCount;
+    }
+
+
 }

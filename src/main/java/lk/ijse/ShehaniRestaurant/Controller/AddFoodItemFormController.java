@@ -4,20 +4,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.ShehaniRestaurant.Model.FoodItem;
 import lk.ijse.ShehaniRestaurant.Model.tm.FoodItemTm;
 import lk.ijse.ShehaniRestaurant.Repository.FoodItemRepo;
+import lk.ijse.ShehaniRestaurant.Repository.OrderRepo;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class AddFoodItemFormController {
+
+    @FXML
+    private TextField txtSearch;
+
+    @FXML
+    private Label lblFoodId;
 
     @FXML
     private JFXButton btnClear;
@@ -56,9 +60,6 @@ public class AddFoodItemFormController {
     private TextField txtDesc;
 
     @FXML
-    private TextField txtId;
-
-    @FXML
     private TextField txtPrice;
 
     @FXML
@@ -70,6 +71,27 @@ public class AddFoodItemFormController {
     public void initialize(){
         setCellValueFactory();
         loadAllFoodItem();
+        getCurrentFoodId();
+    }
+
+    private void getCurrentFoodId() {
+        try {
+            int currentId = FoodItemRepo.getCurrentId();
+            String nextOrderId = generateNextFoodId(currentId);
+
+            lblFoodId.setText(nextOrderId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private String generateNextFoodId(int currentId) {
+        if(currentId != 0) {
+
+            int idNum = currentId;
+            return "F" + ++idNum;
+        }
+        return "F1";
     }
 
     private void loadAllFoodItem() {
@@ -89,7 +111,7 @@ public class AddFoodItemFormController {
             }
             tblFoodItem.setItems(obList);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -106,7 +128,8 @@ public class AddFoodItemFormController {
     }
 
     private void clearFields() {
-        txtId.setText("");
+//        txtId.setText("");
+        getCurrentFoodId();
         txtname.setText("");
         txtDesc.setText("");
         txtPrice.setText("");
@@ -114,7 +137,8 @@ public class AddFoodItemFormController {
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblFoodId.getText();
 
         try {
             Boolean isDeleted = FoodItemRepo.Delete(id);
@@ -134,7 +158,8 @@ public class AddFoodItemFormController {
 
     public void updateOnAction(ActionEvent actionEvent) {
         FoodItem foodItem = new FoodItem(
-                txtId.getText(),
+//                txtId.getText(),
+                lblFoodId.getText(),
                 txtname.getText(),
                 txtDesc.getText(),
                 txtPrice.getText(),
@@ -155,7 +180,8 @@ public class AddFoodItemFormController {
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblFoodId.getText();
         String name = txtname.getText();
         String desc = txtDesc.getText();
         String price = txtPrice.getText();
@@ -177,12 +203,17 @@ public class AddFoodItemFormController {
     }
 
     public void txtSearchOnActionId(ActionEvent actionEvent) {
-        String id = txtId.getText();
+        btnSearchOnAction(actionEvent);
+    }
+
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+        String id = txtSearch.getText();
 
         try {
             FoodItem foodItem = FoodItemRepo.SearchById(id);
             if (foodItem != null){
-                txtId.setText(foodItem.getId());
+//                txtId.setText(foodItem.getId());
+                lblFoodId.setText(foodItem.getId());
                 txtname.setText(foodItem.getName());
                 txtDesc.setText(foodItem.getDesc());
                 txtPrice.setText(foodItem.getPrice());

@@ -144,4 +144,33 @@ public class FoodItemRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static boolean isAvailable(String foodId, int qty) throws SQLException {
+        String sql = "SELECT AvailabilityQty FROM NonAlcoholFoodItem WHERE FoodId = ?";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        pstm.setObject(1,foodId);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()){
+            int dbQty = Integer.parseInt(resultSet.getString(1));
+            if (dbQty >= qty){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int getCurrentId() throws SQLException {
+        String sql = "SELECT * FROM NonAlcoholFoodItem";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+        int foodItemCount = 0;
+        while (resultSet.next()){
+            ++foodItemCount;
+        }
+        return foodItemCount;
+    }
 }

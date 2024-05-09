@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.ShehaniRestaurant.Model.Bear;
 import lk.ijse.ShehaniRestaurant.Model.FoodItem;
@@ -20,6 +17,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AddBearItemFormController {
+    @FXML
+    public JFXButton btnSearch;
+    @FXML
+    public Label lblBearId;
+    @FXML
+    public TextField txtSearch;
 
     @FXML
     private JFXButton btnClear;
@@ -69,6 +72,28 @@ public class AddBearItemFormController {
     public void initialize(){
         setCellValueFactory();
         loadAllBear();
+        getCurrentBearId();
+
+    }
+
+    private void getCurrentBearId() {
+        try {
+            int currentId = BearRepo.getCurrentId();
+            String nextOrderId = generateNextFoodId(currentId);
+
+            lblBearId.setText(nextOrderId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private String generateNextFoodId(int currentId) {
+        if(currentId != 0) {
+
+            int idNum = currentId;
+            return "B" + ++idNum;
+        }
+        return "B1";
     }
 
     private void loadAllBear() {
@@ -107,7 +132,8 @@ public class AddBearItemFormController {
     }
 
     private void clearFields() {
-        txtId.setText("");
+//        txtId.setText("");
+        getCurrentBearId();
         txtname.setText("");
         txtAlcoholContent.setText("");
         txtPrice.setText("");
@@ -116,7 +142,8 @@ public class AddBearItemFormController {
 
     @FXML
     void deleteOnAction(ActionEvent event) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblBearId.getText();
 
         try {
             Boolean isDeleted = BearRepo.Delete(id);
@@ -136,7 +163,8 @@ public class AddBearItemFormController {
 
     @FXML
     void saveOnAction(ActionEvent event) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblBearId.getText();
         String name = txtname.getText();
         String price = txtPrice.getText();
         String qty = txtQty.getText();
@@ -159,29 +187,14 @@ public class AddBearItemFormController {
 
     @FXML
     void txtSearchOnActionId(ActionEvent event) {
-        String id = txtId.getText();
-
-        try {
-            Bear bear = BearRepo.SearchById(id);
-            if (bear != null){
-                txtId.setText(bear.getId());
-                txtname.setText(bear.getName());
-                txtPrice.setText(bear.getPrice());
-                txtQty.setText(bear.getQty());
-                txtAlcoholContent.setText(bear.getAlcoholContent());
-
-            } else{
-                new Alert(Alert.AlertType.ERROR, "Bear Item Not Found!").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
+        btnSearchOnAction(event);
     }
 
     @FXML
     void updateOnAction(ActionEvent event) {
         Bear bear = new Bear(
-                txtId.getText(),
+//                txtId.getText(),
+                lblBearId.getText(),
                 txtname.getText(),
                 txtPrice.getText(),
                 "Yes",
@@ -201,4 +214,24 @@ public class AddBearItemFormController {
         }
     }
 
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+        String id = txtSearch.getText();
+
+        try {
+            Bear bear = BearRepo.SearchById(id);
+            if (bear != null){
+//                txtId.setText(bear.getId());
+                lblBearId.setText(bear.getId());
+                txtname.setText(bear.getName());
+                txtPrice.setText(bear.getPrice());
+                txtQty.setText(bear.getQty());
+                txtAlcoholContent.setText(bear.getAlcoholContent());
+
+            } else{
+                new Alert(Alert.AlertType.ERROR, "Bear Item Not Found!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
 }

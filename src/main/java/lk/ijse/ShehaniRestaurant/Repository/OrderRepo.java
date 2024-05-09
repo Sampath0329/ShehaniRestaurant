@@ -7,7 +7,8 @@ import java.sql.*;
 
 public class OrderRepo {
     public static String getCurrentId() throws SQLException {
-        String sql = "SELECT OrderId FROM Orders ORDER BY OrderId DESC LIMIT 1";
+//        String sql = "SELECT OrderId FROM Orders ORDER BY OrderId DESC LIMIT 1";
+        String sql = "SELECT MAX(CAST(SUBSTRING(OrderId, 2) AS UNSIGNED)) AS HighestOrderId FROM Orders;";
 
         PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
 
@@ -34,5 +35,40 @@ public class OrderRepo {
 
         return pstm.executeUpdate() > 0;
 
+    }
+
+    public static boolean Update(String orderId, String deliveryId) throws SQLException {
+        String sql = "UPDATE Orders SET DeliveryId = ? WHERE OrderId = ?";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+        pstm.setObject(1,deliveryId);
+        pstm.setObject(2,orderId);
+
+        return pstm.executeUpdate() > 0;
+    }
+
+    public static int GetOrderCount() throws SQLException {
+        String sql = "SELECT * FROM Orders";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        int orderCount = 0;
+        while (resultSet.next()){
+           ++orderCount;
+        }
+        return orderCount;
+    }
+
+    public static double GetTotalIncome() throws SQLException {
+        String sql = "SELECT SUM(PaymentAmount) FROM Orders";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if (resultSet.next()){
+            return Double.parseDouble(resultSet.getString(1));
+        }
+        return 0.0;
     }
 }

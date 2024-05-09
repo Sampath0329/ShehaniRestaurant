@@ -23,14 +23,14 @@ public class DashboardFormController {
     }
 
     private void loardDashBord() throws IOException {
-        AnchorPane dashBoardCenter = FXMLLoader.load(this.getClass().getResource("/View/DashBord_Center_Form.fxml"));
+        AnchorPane dashBoardCenter = FXMLLoader.load(this.getClass().getResource("/View/DashBordCenter_Form.fxml"));
 
         centerNode.getChildren().clear();
         centerNode.getChildren().add(dashBoardCenter);
     }
 
     public void dashboardOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane dashBoardCenter = FXMLLoader.load(this.getClass().getResource("/View/DashBord_Center_Form.fxml"));
+        AnchorPane dashBoardCenter = FXMLLoader.load(this.getClass().getResource("/View/DashBordCenter_Form.fxml"));
 
         centerNode.getChildren().clear();
         centerNode.getChildren().add(dashBoardCenter);
@@ -83,18 +83,13 @@ public class DashboardFormController {
         centerNode.getChildren().add(vehicleForm);
     }
 
-    public void deliveryOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane vehicleForm = FXMLLoader.load(this.getClass().getResource("/View/Delivery_Form.fxml"));
+//    public void deliveryOnAction(ActionEvent actionEvent) throws IOException {
+//        AnchorPane vehicleForm = FXMLLoader.load(this.getClass().getResource("/View/Delivery_Form.fxml"));
+//
+//        centerNode.getChildren().clear();
+//        centerNode.getChildren().add(vehicleForm);
+//    }
 
-        centerNode.getChildren().clear();
-        centerNode.getChildren().add(vehicleForm);
-    }
-
-    public void reportOnAction(ActionEvent actionEvent) {
-    }
-
-    public void settingOnAction(ActionEvent actionEvent) {
-    }
 
     public void logoutOnAction(ActionEvent actionEvent) {
 

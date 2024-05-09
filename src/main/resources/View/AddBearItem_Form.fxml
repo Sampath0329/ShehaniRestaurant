@@ -24,15 +24,15 @@
             <TableColumn fx:id="colAlcCon" prefWidth="273.0" text="AlcoholContent" />
          </columns>
       </TableView>
-      <TextField fx:id="txtPrice" layoutX="272.0" layoutY="346.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtPrice" layoutX="272.0" layoutY="235.0" prefHeight="48.0" prefWidth="433.0" />
       <TextField fx:id="txtname" layoutX="949.0" layoutY="235.0" prefHeight="48.0" prefWidth="433.0" />
-      <TextField fx:id="txtAlcoholContent" layoutX="272.0" layoutY="457.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtAlcoholContent" layoutX="272.0" layoutY="346.0" prefHeight="48.0" prefWidth="433.0" />
       <JFXButton fx:id="btnClear" layoutX="901.0" layoutY="490.0" onAction="#clearOnAction" prefHeight="38.0" prefWidth="104.0" text="Clear" />
       <JFXButton fx:id="btnDelete" layoutX="1044.0" layoutY="490.0" onAction="#deleteOnAction" prefHeight="38.0" prefWidth="134.0" text="Delete" />
       <JFXButton fx:id="btnUpdate" layoutX="1220.0" layoutY="490.0" onAction="#updateOnAction" prefHeight="38.0" prefWidth="141.0" text="Update" />
       <JFXButton fx:id="btnSave" layoutX="1393.0" layoutY="490.0" onAction="#saveOnAction" prefHeight="38.0" prefWidth="104.0" text="Save" />
       <TextField fx:id="txtQty" layoutX="949.0" layoutY="346.0" prefHeight="48.0" prefWidth="433.0" />
-      <Label layoutX="273.0" layoutY="215.0" text="Bear Id:">
+      <Label layoutX="273.0" layoutY="164.0" text="Bear Id:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -42,12 +42,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="272.0" layoutY="318.0" text="Price*">
+      <Label layoutX="272.0" layoutY="207.0" text="Price*">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="274.0" layoutY="428.0" text="AlcoholContent*">
+      <Label layoutX="274.0" layoutY="317.0" text="AlcoholContent*">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -57,6 +57,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtId" layoutX="272.0" layoutY="244.0" onAction="#txtSearchOnActionId" prefHeight="48.0" prefWidth="433.0" />
+      <Label fx:id="lblBearId" layoutX="347.0" layoutY="156.0" prefHeight="38.0" prefWidth="123.0" textFill="#2216d3">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtSearch" layoutX="1164.0" layoutY="50.0" onAction="#txtSearchOnActionId" prefHeight="48.0" prefWidth="206.0" />
+      <JFXButton fx:id="btnSearch" layoutX="1411.0" layoutY="55.0" onAction="#btnSearchOnAction" prefHeight="38.0" prefWidth="141.0" text="Search" />
    </children>
 </AnchorPane>

@@ -125,4 +125,33 @@ public class BearRepo {
         return pstm.executeUpdate() > 0;
 
     }
+
+    public static boolean isAvailable(String foodId, int qty) throws SQLException {
+        String sql = "SELECT AvailableQty FROM AlcoholFoodItem WHERE BearId = ?";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        pstm.setObject(1,foodId);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()){
+            int dbQty = Integer.parseInt(resultSet.getString(1));
+            if (dbQty >= qty){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int getCurrentId() throws SQLException {
+        String sql = "SELECT * FROM AlcoholFoodItem";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+        int bearItemCount = 0;
+        while (resultSet.next()){
+            ++bearItemCount;
+        }
+        return bearItemCount;
+    }
 }

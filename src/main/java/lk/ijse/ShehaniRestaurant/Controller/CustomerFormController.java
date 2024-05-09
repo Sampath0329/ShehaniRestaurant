@@ -7,14 +7,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.ShehaniRestaurant.Model.Customer;
 import lk.ijse.ShehaniRestaurant.Model.tm.CustomerTm;
 import lk.ijse.ShehaniRestaurant.Repository.CustomerRepo;
+import lk.ijse.ShehaniRestaurant.Repository.FoodItemRepo;
+import lk.ijse.ShehaniRestaurant.Util.Regex;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerFormController {
+
+
+    @FXML
+    private Label lblCustomerId;
+
+    @FXML
+    private TextField txtSearch;
 
 //    @FXML
 //    private JFXButton btnClear;
@@ -71,7 +81,36 @@ public class CustomerFormController {
         setCellValueFactory();
         setUserNameForLable();
         loadAllCustomers();
+        loadCustomerTel();
+        GetCurrentCustomerId();
 
+    }
+
+    private void GetCurrentCustomerId() {
+        try {
+            int currentId = CustomerRepo.GetCustomerCount();
+            String nextOrderId = generateNextCustomerId(currentId);
+
+            lblCustomerId.setText(nextOrderId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private String generateNextCustomerId(int currentId) {
+        if(currentId != 0) {
+
+            int idNum = currentId;
+            return "C" + ++idNum;
+        }
+        return "C1";
+    }
+
+    private void loadCustomerTel() {
+
+        if (PlaceorderFormController.customerTel != null){
+            txtTel.setText(PlaceorderFormController.customerTel);
+        }
 
     }
 
@@ -102,11 +141,12 @@ public class CustomerFormController {
             }
             tblCustomer.setItems(obList);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     private void setUserNameForLable() {
+//        login Form idn enn on nm comment ek ainn krnn
 //        lblUserName.setText(LoginFormController.SUserName);
         lblUserName.setText("Admin");
 
@@ -118,7 +158,8 @@ public class CustomerFormController {
     }
 
     public void deleteOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblCustomerId.getText();
 
         try {
             Boolean isDeleted = CustomerRepo.Delete(id);
@@ -137,7 +178,8 @@ public class CustomerFormController {
     }
 
     public void updateOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblCustomerId.getText();
         String name = txtName.getText();
         String NIC = txtNIC.getText();
         String address = txtAddress.getText();
@@ -156,55 +198,96 @@ public class CustomerFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }finally {
             loadAllCustomers();
-            setCellValueFactory();
             clearFields();
         }
 
     }
 
     public void saveOnAction(ActionEvent actionEvent) {
-        String id = txtId.getText();
+//        String id = txtId.getText();
+        String id = lblCustomerId.getText();
         String name = txtName.getText();
         String NIC = txtNIC.getText();
         String address = txtAddress.getText();
         String tel = txtTel.getText();
         String userName = lblUserName.getText();
 
-        Customer customer = new Customer(id,name,NIC,address,tel,userName);
+        if (isValied()){
 
-        try {
-            Boolean isSaved = CustomerRepo.save(customer);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
+            Customer customer = new Customer(id,name,NIC,address,tel,userName);
+
+            try {
+                Boolean isSaved = CustomerRepo.save(customer);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
+                    clearFields();
+                }
+            } catch (SQLException e) {
+
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }finally {
+                loadAllCustomers();
+                setCellValueFactory();
                 clearFields();
             }
-        } catch (SQLException e) {
-
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }finally {
-            loadAllCustomers();
-            setCellValueFactory();
-            clearFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "isValied True Wenne na").show();
         }
+
 
 
     }
 
+
     private void clearFields() {
-        txtId.setText("");
+//        txtId.setText("");
+        GetCurrentCustomerId();
         txtName.setText("");
         txtNIC.setText("");
         txtAddress.setText("");
         txtTel.setText("");
+
     }
 
     public void txtSearchOnActionId(ActionEvent actionEvent) {
-        String id = txtId.getText();
+        btnSearchOnAction(actionEvent);
+    }
+
+    private boolean isValied() {
+        if (!Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.Name,txtName)) return false;
+        if (!Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.NIC,txtNIC)) return false;
+        if (!Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.Address,txtAddress)) return false;
+        if (!Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.Contact,txtTel)) return false;
+
+        return  true;
+    }
+
+    public void txtCustomerNameOnKeyReleased(KeyEvent keyEvent) {
+       Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.Name,txtName);
+    }
+
+    public void txtCustomerNICOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.NIC,txtNIC);
+    }
+
+    public void txtCustomerAddressOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.Address,txtAddress);
+    }
+
+    public void txtCustomerTelOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.ShehaniRestaurant.Util.TextField.Contact,txtTel);
+    }
+
+    public void btnSearchOnAction(ActionEvent actionEvent) {
+//        String id = txtId.getText();
+        String id = txtSearch.getText();
 
         try {
             Customer customer = CustomerRepo.searchById(id);
             if (customer != null){
-                txtId.setText(customer.getId());
+//                txtId.setText(customer.getId());
+
+                lblCustomerId.setText(customer.getId());
                 txtName.setText(customer.getName());
                 txtAddress.setText(customer.getAddress());
                 txtNIC.setText(customer.getNIC());
@@ -215,6 +298,5 @@ public class CustomerFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
     }
 }
