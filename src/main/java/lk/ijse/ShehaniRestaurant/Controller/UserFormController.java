@@ -64,6 +64,19 @@ public class UserFormController {
     public void initialize(){
         setCellValueFactory();
         loadAllUser();
+        setTableAction();
+    }
+
+    private void setTableAction() {
+        tblUser.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            if (newSelection != null) {
+                txtId.setText(newSelection.getId());
+                txtname.setText(newSelection.getName());
+                txtPw.setText(newSelection.getPw());
+                txtNIC.setText(newSelection.getNIC());
+
+            }
+        });
     }
 
     private void setCellValueFactory(){
@@ -75,6 +88,8 @@ public class UserFormController {
 
 
     private void loadAllUser() {
+
+
 
         ObservableList<UserTm> obList = FXCollections.observableArrayList();
         try {

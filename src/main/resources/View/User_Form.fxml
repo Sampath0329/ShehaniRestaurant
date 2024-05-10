@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import java.lang.String?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.UserFormController">
+<AnchorPane prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.UserFormController">
    <children>
       <Label layoutX="631.0" layoutY="46.0" text=" User Manage" textFill="WHITE">
          <font>
             <Font name="System Bold" size="51.0" />
          </font>
       </Label>
-      <TableView fx:id="tblUser" layoutX="65.0" layoutY="554.0" onMouseClicked="#getAllDetails" prefHeight="423.0" prefWidth="1461.0">
+      <TableView fx:id="tblUser" layoutX="65.0" layoutY="554.0" prefHeight="423.0" prefWidth="1461.0">
          <columns>
             <TableColumn fx:id="colId" prefWidth="161.0" text="UserId" />
             <TableColumn fx:id="colName" prefWidth="448.0" text="Name" />

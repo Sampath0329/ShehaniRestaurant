@@ -3,24 +3,28 @@ package lk.ijse.ShehaniRestaurant.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.time.LocalTime;
 
 public class DashboardFormController {
 
 
     public AnchorPane centerNode;
+    public Label lbltimenow;
 
     public void initialize()  {
 
         try {
             loardDashBord();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
     }
+
 
     private void loardDashBord() throws IOException {
         AnchorPane dashBoardCenter = FXMLLoader.load(this.getClass().getResource("/View/DashBordCenter_Form.fxml"));
