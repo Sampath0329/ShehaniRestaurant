@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.ShehaniRestaurant.Model.Bear;
 import lk.ijse.ShehaniRestaurant.Model.FoodItem;
 import lk.ijse.ShehaniRestaurant.Model.tm.BearTm;
@@ -73,7 +74,20 @@ public class AddBearItemFormController {
         setCellValueFactory();
         loadAllBear();
         getCurrentBearId();
+        setTableAction();
+    }
 
+    private void setTableAction() {
+        tblBear.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            if (newSelection != null) {
+                lblBearId.setText(newSelection.getId());
+                txtname.setText(newSelection.getName());
+                txtPrice.setText(newSelection.getPrice());
+                txtQty.setText(newSelection.getQty());
+                txtAlcoholContent.setText(newSelection.getAlcoholContent());
+
+            }
+        });
     }
 
     private void getCurrentBearId() {
@@ -82,6 +96,7 @@ public class AddBearItemFormController {
             String nextOrderId = generateNextFoodId(currentId);
 
             lblBearId.setText(nextOrderId);
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -187,7 +202,25 @@ public class AddBearItemFormController {
 
     @FXML
     void txtSearchOnActionId(ActionEvent event) {
-        btnSearchOnAction(event);
+        String id = txtSearch.getText();
+
+        try {
+            Bear bear = BearRepo.SearchById(id);
+            if (bear != null){
+//                txtId.setText(bear.getId());
+                lblBearId.setText(bear.getId());
+                txtname.setText(bear.getName());
+                txtPrice.setText(bear.getPrice());
+                txtQty.setText(bear.getQty());
+                txtAlcoholContent.setText(bear.getAlcoholContent());
+
+            } else{
+                new Alert(Alert.AlertType.ERROR, "Bear Item Not Found!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
     }
 
     @FXML
@@ -214,24 +247,9 @@ public class AddBearItemFormController {
         }
     }
 
-    public void btnSearchOnAction(ActionEvent actionEvent) {
-        String id = txtSearch.getText();
 
-        try {
-            Bear bear = BearRepo.SearchById(id);
-            if (bear != null){
-//                txtId.setText(bear.getId());
-                lblBearId.setText(bear.getId());
-                txtname.setText(bear.getName());
-                txtPrice.setText(bear.getPrice());
-                txtQty.setText(bear.getQty());
-                txtAlcoholContent.setText(bear.getAlcoholContent());
 
-            } else{
-                new Alert(Alert.AlertType.ERROR, "Bear Item Not Found!").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
+    public void searchOnMouseClick(MouseEvent mouseEvent) {
+        txtSearchOnActionId(new ActionEvent());
     }
 }

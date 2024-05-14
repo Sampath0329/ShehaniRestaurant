@@ -1,6 +1,7 @@
 package lk.ijse.ShehaniRestaurant.Controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import lk.ijse.ShehaniRestaurant.Model.Vehicle;
 import lk.ijse.ShehaniRestaurant.Model.VehicleColour;
@@ -120,11 +122,6 @@ public class VehicleFormController {
         cBoxColour.setItems(vehicleColourObservableList);
 
 
-    }
-
-    @FXML
-    public void BtnSearchOnAction(ActionEvent event) {
-        TxtSearchIdOnAction(event);
     }
 
     @FXML
@@ -266,9 +263,20 @@ public class VehicleFormController {
                     break;
             }
         }
+     
     }
 
 
+    public void typeOnAction(ActionEvent actionEvent) {
+    }
 
+    public void platenumberOnAction(ActionEvent actionEvent) {
+    }
 
+    public void datepickerOnAction(ActionEvent actionEvent) {
+    }
+
+    public void searchOnMouseClick(MouseEvent mouseEvent) {
+        TxtSearchIdOnAction(new ActionEvent());
+    }
 }

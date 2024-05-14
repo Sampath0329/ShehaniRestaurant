@@ -152,6 +152,29 @@ public class CustomerRepo {
         }
         return null;
     }
+    public static Customer GetCustomerIdAndName(String NIC) throws SQLException {
+        String sql = "SELECT * FROM Customer WHERE NIC = ? AND Active = 'Yes'";
+
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        pstm.setObject(1,NIC);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()){
+            String id = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            String address = resultSet.getString(3);
+            String tbTel = resultSet.getString(4);
+            String username = resultSet.getString(5);
+            String dbNIC = resultSet.getString(6);
+
+            Customer customer = new Customer(id,name,address,tbTel,username, dbNIC);
+
+            return customer;
+        }
+        return null;
+    }
+
 
     public static int GetCustomerCount() throws SQLException {
         String sql = "SELECT *  FROM Customer;";
@@ -164,6 +187,21 @@ public class CustomerRepo {
 
         }
         return customerCount;
+    }
+
+
+    public static List<String> GetCustomerNIC() throws SQLException {
+        String sql = "SELECT NIC FROM Customer WHERE Active = 'Yes'";
+        PreparedStatement pstm = DbConnection.getConnection().prepareStatement(sql);
+
+        List<String> NICList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String NIC = resultSet.getString(1);
+            NICList.add(NIC);
+        }
+        return NICList;
     }
 
 

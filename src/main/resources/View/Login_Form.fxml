@@ -1,44 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="658.0" prefWidth="560.0" styleClass="pane" stylesheets="@../Style/login_form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.LoginFormController">
+<AnchorPane fx:id="rootNode" prefHeight="500.0" prefWidth="860.0" style="-fx-background-color: WHite;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.LoginFormController">
    <children>
-      <Label fx:id="date" layoutX="397.0" layoutY="633.0" prefHeight="35.0" prefWidth="97.0" text="0000/00/00" textAlignment="CENTER" textFill="#00d4ff" textOverrun="CENTER_ELLIPSIS">
+      <Label fx:id="date" layoutX="635.0" layoutY="633.0" prefHeight="35.0" prefWidth="115.0" text="0000/00/00" textAlignment="CENTER" textFill="#00d4ff" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lTittle" layoutX="157.0" layoutY="31.0" text="Login Form" textFill="#1c00bc">
-         <font>
-            <Font name="System Bold" size="46.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtId" layoutX="167.0" layoutY="238.0" prefHeight="45.0" prefWidth="226.0" />
-      <Label layoutX="167.0" layoutY="210.0" text="Userame">
-         <font>
-            <Font name="Khmer OS System" size="19.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtPw" layoutX="167.0" layoutY="332.0" prefHeight="45.0" prefWidth="226.0" />
-      <Label layoutX="167.0" layoutY="304.0" text="Password">
-         <font>
-            <Font name="Khmer OS System" size="19.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="btnLogin" layoutX="237.0" layoutY="434.0" onAction="#loginOnAction" text="Login" textFill="#2600ff">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </JFXButton>
-      <Label fx:id="time" layoutX="491.0" layoutY="633.0" prefHeight="35.0" prefWidth="69.0" text="00:00:00" textAlignment="CENTER" textFill="#00ddff" textOverrun="CENTER_ELLIPSIS">
+      <Label fx:id="time" layoutX="785.0" layoutY="633.0" prefHeight="35.0" prefWidth="84.0" text="00:00:00" textAlignment="CENTER" textFill="#00ddff" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+      <ImageView fitHeight="683.0" fitWidth="1020.0" layoutX="-79.0" layoutY="-8.0">
+         <image>
+            <Image url="@../Assest/Icon/RestaurandLogo/LoginpageBackGround.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="258.0" layoutY="61.0" prefHeight="553.0" prefWidth="405.0" style="-fx-background-color: White; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../Style/login_form.css">
+         <children>
+            <JFXButton fx:id="btnLogin" layoutX="164.0" layoutY="447.0" onAction="#loginOnAction" styleClass="jfx-button" stylesheets="@../Style/login_form.css" text="Login" textFill="#2600ff">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </JFXButton>
+            <Group layoutX="60.0" layoutY="277.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="71.0">
+               <children>
+                  <Label prefHeight="45.0" prefWidth="264.0" style="-fx-border-color: #8B848A;">
+                     <font>
+                        <Font name="Khmer OS System" size="19.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="3.0" layoutY="5.0">
+                     <image>
+                        <Image url="@../Assest/Icon/UserName.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="txtId" layoutX="38.0" prefHeight="45.0" prefWidth="226.0" promptText="UserName" style="-fx-border-color: #8B848A;" />
+               </children>
+            </Group>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="105.0" layoutY="42.0">
+               <image>
+                  <Image url="@../Assest/Icon/RestaurandLogo/shehanirestaurant.jpeg" />
+               </image>
+            </ImageView>
+            <Label layoutX="159.0" layoutY="25.0" text="Login">
+               <font>
+                  <Font name="Khmer OS System" size="29.0" />
+               </font>
+            </Label>
+            <Group layoutX="60.0" layoutY="354.0" AnchorPane.bottomAnchor="154.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="354.0">
+               <children>
+                  <Label prefHeight="45.0" prefWidth="264.0" style="-fx-border-color: #8B848A;">
+                     <font>
+                        <Font name="Khmer OS System" size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtPw" layoutX="39.0" prefHeight="45.0" prefWidth="226.0" promptText="Password" style="-fx-border-color: #8B848A;" />
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="2.0" layoutY="5.0">
+                     <image>
+                        <Image url="@../Assest/Icon/password.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

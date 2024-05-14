@@ -1,0 +1,232 @@
+create table AlcoholFoodItem
+(
+    BearId         varchar(20)    not null
+        primary key,
+    Name           varchar(100)   not null,
+    Price          decimal(10, 2) null,
+    Availability   varchar(20)    null,
+    AlcoholContent decimal(5, 1)  null,
+    AvailableQty   varchar(20)    null
+);
+
+create table Ingredient
+(
+    IngredientId varchar(20)    not null
+        primary key,
+    Name         varchar(100)   not null,
+    EXP_Date     date           null,
+    Quantity     int            null,
+    Unit         varchar(50)    null,
+    UnitPrice    decimal(10, 2) null,
+    Deleted      varchar(100)   null
+);
+
+create table NonAlcoholFoodItem
+(
+    FoodId          varchar(20)    not null
+        primary key,
+    Name            varchar(100)   not null,
+    Description     varchar(500)   null,
+    Price           decimal(10, 2) null,
+    AvailabilityQty varchar(20)    null,
+    Active          varchar(20)    null
+);
+
+create table FoodItemIngredientDetail
+(
+    FoodId       varchar(20) null,
+    IngredientId varchar(20) null,
+    BeerId       varchar(20) null,
+    constraint FoodItemIngredientDetail_ibfk_1
+        foreign key (FoodId) references NonAlcoholFoodItem (FoodId)
+            on delete cascade,
+    constraint FoodItemIngredientDetail_ibfk_2
+        foreign key (IngredientId) references Ingredient (IngredientId)
+            on delete cascade,
+    constraint FoodItemIngredientDetail_ibfk_3
+        foreign key (BeerId) references AlcoholFoodItem (BearId)
+            on delete cascade
+);
+
+create index BeerId
+    on FoodItemIngredientDetail (BeerId);
+
+create index FoodId
+    on FoodItemIngredientDetail (FoodId);
+
+create index IngredientId
+    on FoodItemIngredientDetail (IngredientId);
+
+create table Supplier
+(
+    SupplierId varchar(20)  not null
+        primary key,
+    Name       varchar(100) not null,
+    Contact    varchar(20)  null,
+    Active     varchar(100) null
+);
+
+create table SupplierIngredientDetail
+(
+    SupplierId   varchar(20) null,
+    IngredientId varchar(20) null,
+    Date         date        null,
+    constraint SupplierIngredientDetail_ibfk_1
+        foreign key (SupplierId) references Supplier (SupplierId)
+            on update cascade on delete cascade,
+    constraint SupplierIngredientDetail_ibfk_2
+        foreign key (IngredientId) references Ingredient (IngredientId)
+            on update cascade on delete cascade
+);
+
+create index IngredientId
+    on SupplierIngredientDetail (IngredientId);
+
+create index SupplierId
+    on SupplierIngredientDetail (SupplierId);
+
+create table User
+(
+    UserId   varchar(20)  not null
+        primary key,
+    Name     varchar(100) not null,
+    Password varchar(100) not null,
+    NIC      varchar(50)  null,
+    Active   varchar(20)  null
+);
+
+create table Customer
+(
+    CustomerId varchar(20)  not null
+        primary key,
+    Name       varchar(100) not null,
+    Address    varchar(500) not null,
+    Contact    varchar(20)  not null,
+    UserId     varchar(20)  not null,
+    NIC        varchar(50)  null,
+    Active     varchar(100) null,
+    constraint Customer_ibfk_1
+        foreign key (UserId) references User (UserId)
+            on update cascade on delete cascade
+);
+
+create index UserId
+    on Customer (UserId);
+
+create table FullTimeEmployee
+(
+    FullTimeEmployeeId varchar(20)    not null
+        primary key,
+    Name               varchar(100)   not null,
+    Address            varchar(500)   null,
+    Contact            varchar(20)    null,
+    FixedSalary        decimal(10, 2) null,
+    HireDate           date           null,
+    UserId             varchar(20)    null,
+    Active             varchar(20)    null,
+    constraint FullTimeEmployee_ibfk_1
+        foreign key (UserId) references User (UserId)
+            on update cascade on delete cascade
+);
+
+create index UserId
+    on FullTimeEmployee (UserId);
+
+create table PartTimeEmployee
+(
+    PartTimeEmployeeId varchar(20)    not null
+        primary key,
+    Name               varchar(100)   not null,
+    Address            varchar(500)   null,
+    Contact            varchar(20)    null,
+    WorkingHour        decimal(10, 2) null,
+    PerHourSalary      decimal(10, 2) null,
+    HireDate           date           null,
+    UserId             varchar(20)    null,
+    Active             varchar(100)   null,
+    constraint PartTimeEmployee_ibfk_1
+        foreign key (UserId) references User (UserId)
+            on update cascade on delete cascade
+);
+
+create index UserId
+    on PartTimeEmployee (UserId);
+
+create table Vehicle
+(
+    PlateNumber  varchar(20)  not null
+        primary key,
+    Type         varchar(100) not null,
+    Color        varchar(50)  null,
+    Availability varchar(20)  null,
+    LicenseDate  date         null,
+    Deleted      varchar(100) null,
+    constraint PlateNumber
+        unique (PlateNumber)
+);
+
+create table Delivery
+(
+    DeliveryId  varchar(20)  not null
+        primary key,
+    Description varchar(500) null,
+    Address     varchar(100) null,
+    PlateNumber varchar(20)  null,
+    constraint Delivery_ibfk_1
+        foreign key (PlateNumber) references Vehicle (PlateNumber)
+            on update cascade on delete cascade
+);
+
+create index PlateNumber
+    on Delivery (PlateNumber);
+
+create table Orders
+(
+    OrderId       varchar(20)    not null
+        primary key,
+    CustomerId    varchar(20)    null,
+    OrderDate     date           null,
+    TimePlace     time           null,
+    PaymentAmount decimal(10, 2) null,
+    DeliveryId    varchar(20)    null,
+    constraint Orders_ibfk_1
+        foreign key (CustomerId) references Customer (CustomerId)
+            on update cascade on delete cascade,
+    constraint Orders_ibfk_2
+        foreign key (DeliveryId) references Delivery (DeliveryId)
+            on update cascade on delete cascade
+);
+
+create table OrderFoodItemDetail
+(
+    OrderId   varchar(20) null,
+    FoodId    varchar(20) null,
+    BearId    varchar(20) null,
+    Quantity  int         null,
+    UnitPrice double      null,
+    constraint OrderFoodItemDetail_ibfk_1
+        foreign key (OrderId) references Orders (OrderId)
+            on delete cascade,
+    constraint OrderFoodItemDetail_ibfk_2
+        foreign key (FoodId) references NonAlcoholFoodItem (FoodId)
+            on delete cascade,
+    constraint OrderFoodItemDetail_ibfk_3
+        foreign key (BearId) references AlcoholFoodItem (BearId)
+            on delete cascade
+);
+
+create index BeerId
+    on OrderFoodItemDetail (BearId);
+
+create index FoodId
+    on OrderFoodItemDetail (FoodId);
+
+create index OrderId
+    on OrderFoodItemDetail (OrderId);
+
+create index CustomerId
+    on Orders (CustomerId);
+
+create index DeliveryId
+    on Orders (DeliveryId);
+

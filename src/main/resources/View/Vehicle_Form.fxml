@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -19,7 +21,7 @@
             <Font name="System Bold" size="51.0" />
          </font>
       </Label>
-      <TableView fx:id="tblVehicle" layoutX="65.0" layoutY="554.0" prefHeight="423.0" prefWidth="1461.0">
+      <TableView fx:id="tblVehicle" layoutX="65.0" layoutY="554.0" prefHeight="423.0" prefWidth="1461.0" stylesheets="@../Style/login_form.css">
          <columns>
             <TableColumn fx:id="colPlateNumber" prefWidth="324.0" text="PlateNumber" />
             <TableColumn fx:id="colType" prefWidth="501.0" text="Type" />
@@ -28,42 +30,47 @@
             <TableColumn fx:id="colAvailability" prefWidth="167.0" text="Availability" />
          </columns>
       </TableView>
-      <TextField fx:id="txtPlateNumber" layoutX="283.0" layoutY="243.0" prefHeight="48.0" prefWidth="433.0" />
-      <TextField fx:id="txtType" layoutX="283.0" layoutY="348.0" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtPlateNumber" layoutX="283.0" layoutY="243.0" onAction="#platenumberOnAction" prefHeight="48.0" prefWidth="433.0" />
+      <TextField fx:id="txtType" layoutX="283.0" layoutY="348.0" onAction="#typeOnAction" prefHeight="48.0" prefWidth="433.0" />
       <JFXButton fx:id="btnClear" layoutX="901.0" layoutY="469.0" onAction="#ClearOnAction" prefHeight="38.0" prefWidth="104.0" text="Clear" />
       <JFXButton fx:id="btnDelete" layoutX="1044.0" layoutY="469.0" onAction="#DeleteOnAction" prefHeight="38.0" prefWidth="134.0" text="Delete" />
       <JFXButton fx:id="btnUpdate" layoutX="1220.0" layoutY="469.0" onAction="#UpdateOnAction" prefHeight="38.0" prefWidth="141.0" text="Update" />
       <JFXButton fx:id="btnSave" layoutX="1393.0" layoutY="469.0" onAction="#SaveOnAction" prefHeight="38.0" prefWidth="104.0" text="Save" />
-      <Label layoutX="283.0" layoutY="318.0" text="Vehicle Type*">
+      <Label layoutX="283.0" layoutY="318.0" text="Vehicle Type*" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="283.0" layoutY="215.0" text="PlateNumber*">
+      <Label layoutX="283.0" layoutY="215.0" text="PlateNumber*" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="954.0" layoutY="256.0" text="License Date*">
+      <Label layoutX="954.0" layoutY="256.0" text="License Date*" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="954.0" layoutY="361.0" text="Vehicle Colour:">
+      <Label layoutX="954.0" layoutY="361.0" text="Vehicle Colour:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <JFXComboBox fx:id="cBoxColour" layoutX="1093.0" layoutY="357.0" onAction="#ColourSetOnAction" prefHeight="30.0" prefWidth="149.0" style="-fx-background-color: White;" />
-      <CheckBox fx:id="chBoxAvailability" layoutX="283.0" layoutY="450.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="198.0" text="Availability">
+      <CheckBox fx:id="chBoxAvailability" layoutX="283.0" layoutY="450.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="198.0" text="Availability" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="txtSearchId" layoutX="1074.0" layoutY="50.0" onAction="#TxtSearchIdOnAction" prefHeight="48.0" prefWidth="217.0" />
-      <JFXButton fx:id="btnSearch" layoutX="1312.0" layoutY="55.0" onAction="#BtnSearchOnAction" prefHeight="38.0" prefWidth="141.0" text="Search" />
+      <Label layoutX="1074.0" layoutY="50.0" prefHeight="48.0" prefWidth="350.0" style="-fx-background-color: white; -fx-border-color: White;" />
       <Label fx:id="lblColour" layoutX="1261.0" layoutY="362.0" prefHeight="20.0" prefWidth="20.0" />
-      <DatePicker fx:id="datepicker" layoutX="1080.0" layoutY="248.0" prefHeight="38.0" prefWidth="264.0" />
+      <DatePicker fx:id="datepicker" layoutX="1080.0" layoutY="248.0" onAction="#datepickerOnAction" prefHeight="38.0" prefWidth="264.0" />
+      <TextField fx:id="txtSearchId" layoutX="1074.0" layoutY="50.0" onAction="#TxtSearchIdOnAction" prefHeight="48.0" prefWidth="301.0" style="-fx-border-color: white;" styleClass="text-field" />
+      <ImageView fitHeight="48.0" fitWidth="45.0" layoutX="1375.0" layoutY="50.0" onMouseClicked="#searchOnMouseClick">
+         <image>
+            <Image url="@../Assest/Icon/Search.png" />
+         </image>
+      </ImageView>
    </children>
    <styleClass>
       <String fx:value="pane" />

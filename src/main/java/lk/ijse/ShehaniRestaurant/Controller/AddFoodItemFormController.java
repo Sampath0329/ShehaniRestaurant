@@ -72,6 +72,17 @@ public class AddFoodItemFormController {
         setCellValueFactory();
         loadAllFoodItem();
         getCurrentFoodId();
+        setTableAction();
+    }
+
+    private void setTableAction() {
+        tblFoodItem.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            lblFoodId.setText(newSelection.getId());
+            txtname.setText(newSelection.getName());
+            txtDesc.setText(newSelection.getDesc());
+            txtPrice.setText(newSelection.getPrice());
+            txtQty.setText(newSelection.getQty());
+        });
     }
 
     private void getCurrentFoodId() {

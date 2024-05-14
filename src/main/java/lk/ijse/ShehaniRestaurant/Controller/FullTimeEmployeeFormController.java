@@ -78,8 +78,19 @@ public class FullTimeEmployeeFormController {
         SetUserIdForLabel();
         setCellValueFactory();
         loadAllFullTimeEmployee();
+        setTableAction();
     }
-
+    private void setTableAction() {
+        tblFullTimeEmployee.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
+            txtId.setText(newSelection.getFullTimeEmployeeId());
+            txtName.setText(newSelection.getName());
+            txtHireDate.setText(newSelection.getHireDate());
+            txtSalary.setText(newSelection.getFixedSalary());
+            txtTel.setText(newSelection.getContact());
+            txtAddress.setText(newSelection.getAddress());
+            lbUserId.setText(newSelection.getUserId());
+        });
+    }
     private void loadAllFullTimeEmployee() {
         ObservableList<FullTimeEmployeTm> obList = FXCollections.observableArrayList();
         try {

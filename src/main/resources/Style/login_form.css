@@ -3,16 +3,26 @@
     -fx-font-family: Ubuntu Serif;
 }
 .pane{
-    -fx-background-color: #efa443;
+    -fx-background-color: #131920;
 }
 .jfx-button {
     -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-background-color: #00b2ff;
-    -fx-text-fill: #ffffff;
+    /*-fx-font-weight: bold;*/
+    /*-fx-background-color: #00b2ff;*/
+    -fx-text-fill: rgb(12, 100, 231);
     -fx-cursor: hand;
     -fx-background-radius: 10;
+
 }
 .shadow{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 8,0,0,0);
+}
+.jfx-button:hover {
+    -fx-background-color: #1A2632;
+    -fx-text-fill: #ffffff;
+}
+.text-field{
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+    -fx-font-weight: BOLD;
 }

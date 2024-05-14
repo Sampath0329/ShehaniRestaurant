@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.lang.String.valueOf;
+import static lk.ijse.ShehaniRestaurant.Util.TextField.NIC;
 
 public class PlaceorderFormController {
 
@@ -111,6 +112,18 @@ public class PlaceorderFormController {
         getCurrentOrderId();
         setCellValueFactory();
         LoadCustomerAllTel();
+        LoadCustomerAllNIC();
+    }
+
+    private void LoadCustomerAllNIC() {
+        try {
+            List<String> cusTel = CustomerRepo.GetCustomerNIC();
+            String[] possibleNIC = cusTel.toArray(new String[0]);
+
+            TextFields.bindAutoCompletion(txtCusTel, possibleNIC);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     private void LoadCustomerAllTel() {
@@ -379,9 +392,16 @@ public class PlaceorderFormController {
         String tel = txtCusTel.getText();
 
         try {
+
             Customer customer = CustomerRepo.GetCustomer(tel);
-            lblCustomerId.setText(customer.getId());
-            lblCustomerName.setText(customer.getName());
+            if (customer != null){
+                lblCustomerId.setText(customer.getId());
+                lblCustomerName.setText(customer.getName());
+            } else {
+                Customer customer1 = CustomerRepo.GetCustomerIdAndName(tel);
+                lblCustomerId.setText(customer1.getId());
+                lblCustomerName.setText(customer1.getName());
+            }
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

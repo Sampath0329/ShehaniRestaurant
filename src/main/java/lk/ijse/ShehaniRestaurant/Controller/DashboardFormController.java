@@ -2,16 +2,18 @@ package lk.ijse.ShehaniRestaurant.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalTime;
 
 public class DashboardFormController {
 
-
+public AnchorPane rootNode;
     public AnchorPane centerNode;
     public Label lbltimenow;
 
@@ -95,7 +97,14 @@ public class DashboardFormController {
 //    }
 
 
-    public void logoutOnAction(ActionEvent actionEvent) {
+    public void logoutOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/View/Login_Form.fxml"));
+        Stage stage = (Stage) rootNode.getScene().getWindow();
+
+        stage.setScene(new Scene(anchorPane));
+        stage.setTitle("Login Form");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 

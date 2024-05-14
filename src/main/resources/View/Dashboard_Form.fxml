@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="999.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.DashboardFormController">
+<AnchorPane fx:id="rootNode" prefHeight="999.0" prefWidth="1920.0" style="-fx-background-color: #0A0A0A;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.ShehaniRestaurant.Controller.DashboardFormController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="11.0" prefHeight="979.0" prefWidth="300.0" style="-fx-background-color: #FF8A08; -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../Style/login_form.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1612.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="10.0" layoutY="11.0" prefHeight="979.0" prefWidth="300.0" style="-fx-background-color: #131920; -fx-background-radius: 10;" styleClass="shadow" stylesheets="@../Style/login_form.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1612.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label layoutX="108.0" layoutY="85.0" prefHeight="30.0" prefWidth="157.0" text="Restaurant.." textFill="WHITE">
+            <JFXButton fx:id="btnDashboard" layoutX="17.0" layoutY="319.0" onAction="#dashboardOnAction" prefHeight="50.0" prefWidth="264.0" text="Dashboard" />
+            <JFXButton fx:id="btnFoodItem" layoutX="17.0" layoutY="379.0" onAction="#foodItemOnAction" prefHeight="50.0" prefWidth="264.0" text="FoodItem" />
+            <JFXButton fx:id="btnUser" layoutX="17.0" layoutY="439.0" onAction="#userOnAction" prefHeight="50.0" prefWidth="264.0" text="User" />
+            <JFXButton fx:id="btnEmployee" layoutX="17.0" layoutY="499.0" onAction="#employeeOnAction" prefHeight="50.0" prefWidth="264.0" text="Employee" />
+            <JFXButton fx:id="btnCustomer" layoutX="17.0" layoutY="559.0" onAction="#customerOnAction" prefHeight="50.0" prefWidth="264.0" text="Customer" />
+            <JFXButton fx:id="btnOrder" layoutX="17.0" layoutY="619.0" onAction="#orderOnAction" prefHeight="50.0" prefWidth="264.0" text="Order" />
+            <JFXButton fx:id="btnVehicle" layoutX="17.0" layoutY="679.0" onAction="#vehicleOnAction" prefHeight="50.0" prefWidth="264.0" text="Vehicle" />
+            <JFXButton fx:id="btnIngredient" layoutX="17.0" layoutY="739.0" onAction="#ingredientOnAction" prefHeight="50.0" prefWidth="264.0" text="Ingredient" />
+            <JFXButton fx:id="btnSupplier" layoutX="17.0" layoutY="799.0" onAction="#supplierOnAction" prefHeight="50.0" prefWidth="264.0" text="Supplier" />
+            <JFXButton fx:id="btnLogout" layoutX="17.0" layoutY="859.0" onAction="#logoutOnAction" prefHeight="50.0" prefWidth="264.0" text="Logout" />
+            <ImageView fx:id="UserImage" fitHeight="200.0" fitWidth="200.0" layoutX="49.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="63.0" layoutY="25.0" text="Welcome" textFill="#f8e7e7">
                <font>
-                  <Font name="System Bold Italic" size="26.0" />
+                  <Font name="DejaVu Sans Mono Bold" size="39.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="48.0" prefHeight="30.0" prefWidth="157.0" text="Shehani" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="26.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnDashboard" layoutX="17.0" layoutY="319.0" onAction="#dashboardOnAction" prefHeight="60.0" prefWidth="264.0" text="Dashboard" />
-            <JFXButton fx:id="btnFoodItem" layoutX="17.0" layoutY="379.0" onAction="#foodItemOnAction" prefHeight="60.0" prefWidth="264.0" text="FoodItem" />
-            <JFXButton fx:id="btnUser" layoutX="17.0" layoutY="439.0" onAction="#userOnAction" prefHeight="60.0" prefWidth="264.0" text="User" />
-            <JFXButton fx:id="btnEmployee" layoutX="17.0" layoutY="499.0" onAction="#employeeOnAction" prefHeight="60.0" prefWidth="264.0" text="Employee" />
-            <JFXButton fx:id="btnCustomer" layoutX="17.0" layoutY="559.0" onAction="#customerOnAction" prefHeight="60.0" prefWidth="264.0" text="Customer" />
-            <JFXButton fx:id="btnOrder" layoutX="17.0" layoutY="619.0" onAction="#orderOnAction" prefHeight="60.0" prefWidth="264.0" text="Order" />
-            <JFXButton fx:id="btnVehicle" layoutX="17.0" layoutY="679.0" onAction="#vehicleOnAction" prefHeight="60.0" prefWidth="264.0" text="Vehicle" />
-            <JFXButton fx:id="btnIngredient" layoutX="17.0" layoutY="739.0" onAction="#ingredientOnAction" prefHeight="60.0" prefWidth="264.0" text="Ingredient" />
-            <JFXButton fx:id="btnSupplier" layoutX="17.0" layoutY="799.0" onAction="#supplierOnAction" prefHeight="60.0" prefWidth="264.0" text="Supplier" />
-            <JFXButton fx:id="btnLogout" layoutX="17.0" layoutY="859.0" onAction="#logoutOnAction" prefHeight="60.0" prefWidth="264.0" text="Logout" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="centerNode" layoutX="319.0" layoutY="10.0" prefHeight="998.0" prefWidth="1590.0" style="-fx-background-radius: 10;" stylesheets="@../Style/login_form.css">
